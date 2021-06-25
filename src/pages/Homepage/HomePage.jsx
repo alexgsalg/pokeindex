@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 
+import PokeIndex from "../../assets/imgs/Pokeindex-logo.png";
+import WhoIsThis from "../../components/WhoIsThis/WhoIsThis";
+
 function HomePage() {
   const [pokeList, setPokeList] = useState([]);
   const [mysteryModal, setMysteryModal] = useState(false);
-  // const [isLoaded, setIsLoaded] = useState(false);
-  const [whoIsIt, setWhoIsIt] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const pokeNumber = Math.floor(Math.random() * 150) + 1;
-  const howMany = 150;
-
+  const howMany = 151;
   const [mysteryPokemon, setMysteryPokemon] = useState(
     pokeList.find((random) => random.id === Math.floor(Math.random() * 150) + 1)
   );
-
-  const togglewhoIsIt = () => {
-    setWhoIsIt(!whoIsIt);
-  };
-
   useEffect(() => {
     const fetchThemAll = async () => {
       for (let pok = 1; pok <= howMany; pok++) {
@@ -26,12 +22,17 @@ function HomePage() {
         if (!pokeList.find((item) => item.id === pokemon.id)) {
           setPokeList((pokeList) => [...pokeList, pokemon]);
         }
+        if (pok === 151) {
+          setMysteryPokemon(
+            pokeList.find((random) => random.id === pokeNumber)
+          );
+        }
       }
+      setIsLoaded(true);
+      return isLoaded;
     };
     fetchThemAll();
-    setMysteryPokemon(pokeList[pokeNumber]);
-    randomPokemon();
-    return pokeList;
+    return pokeList, mysteryPokemon, isLoaded;
   }, []);
 
   const randomPokemon = () => {
@@ -42,7 +43,19 @@ function HomePage() {
   };
   return (
     <main>
-      {/* {mysteryModal ? <div className="modal">{mysteryPokemon.name}</div> : null} */}
+      {/* Loading */}
+      {!isLoaded ? (
+        <div className="loading">
+          <img src={PokeIndex} alt="Pokemon" />
+        </div>
+      ) : null}
+      {/* Who is this Pokemon */}
+      {mysteryModal ? (
+        <WhoIsThis
+          mysteryPokemon={mysteryPokemon}
+          setMysteryModal={setMysteryModal}
+        />
+      ) : null}
       <button
         onClick={() => {
           randomPokemon();
@@ -52,7 +65,7 @@ function HomePage() {
       </button>
 
       {pokeList.map((pokemon) => (
-        <div>
+        <div key={pokemon.id}>
           <div className="card_header">
             <p>{pokemon.name}</p>
             <span>N°{pokemon.id}</span>
@@ -62,16 +75,16 @@ function HomePage() {
             width="150"
           />
           {pokemon.stats.map((status) => (
-            <div>
+            <div key={status.stat.name}>
               <p>{status.stat.name}</p>
               <p>{status.base_stat}</p>
             </div>
           ))}
-          {pokemon.types.map((item) => (
-            <ul>
-              <li>{item.type.name}</li>
-            </ul>
-          ))}
+          <ul>
+            {pokemon.types.map((item) => (
+              <li key={item.type.name}>{item.type.name}</li>
+            ))}
+          </ul>
         </div>
       ))}
     </main>

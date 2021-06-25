@@ -1,0 +1,36 @@
+.whoisit {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: rgba(255, 255, 255, 0.5); */
+  background: radial-gradient(
+      circle,
+      rgba(240, 72, 96, 0.8) 62%,
+      rgba(200, 14, 41, 0.8) 100%
+    ),
+    url(../../assets/imgs/26176.jpg);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: all ease-in-out 200ms;
+}
+.whoisit .whoisit_container {
+  width: 100%;
+  max-width: 700px;
+  padding: 3rem;
+}
+
+.whoisit__pokemon {
+  width: 100%;
+  max-width: 350px;
+  filter: brightness(0);
+  transition: all ease-in 150ms;
+}
+.whoisit__pokemon.correct {
+  filter: brightness(1);
+}

@@ -1,3 +1,21 @@
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 96, 144, 1) 0%,
+    rgba(0, 120, 192, 1) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: all ease-in-out 200ms;
+}
+
 .pokeSwitch {
   touch-action: pan-x;
   display: inline-block;
