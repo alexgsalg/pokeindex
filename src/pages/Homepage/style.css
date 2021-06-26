@@ -16,89 +16,22 @@
   transition: all ease-in-out 200ms;
 }
 
-.pokeSwitch {
-  touch-action: pan-x;
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-  background-color: transparent;
-  border: 0;
-  padding: 0;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-tap-highlight-color: transparent;
+.card_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 1.2rem;
+  padding: 2rem;
 }
 
-.pokeSwitch-input {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+.card {
+  background-color: green;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
-.pokeSwitch-check,
-.pokeSwitch-uncheck {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  top: 0;
-  bottom: 0;
-  margin-top: auto;
-  margin-bottom: auto;
-  line-height: 0;
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-.pokeSwitch-check {
-  left: 8px;
-}
-.pokeSwitch-uncheck {
-  opacity: 1;
-  right: 10px;
+.card_header {
 }
 
-.pokeSwitch-uncheck span,
-.pokeSwitch-check span {
-  align-items: center;
-  display: flex;
-  height: 10px;
-  justify-content: center;
-  position: relative;
-  width: 10px;
-}
-
-.pokeSwitch-container {
-  position: relative;
-  width: 50px;
-  height: 24px;
-  padding: 0;
-  border-radius: 30px;
-  background-color: #c7a008;
-  transition: all 0.2s ease;
-}
-
-.pokeSwitch-circle {
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #fafafa;
-  box-sizing: border-box;
-  transition: all 0.25s ease;
-}
-.pokeSwitch--checked .pokeSwitch-container {
-  background-color: #3c5aa6;
-}
-.pokeSwitch--checked .pokeSwitch-circle {
-  left: 27px;
+.card_body {
+  background-color: #fff;
 }

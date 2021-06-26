@@ -16,21 +16,124 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all ease-in-out 200ms;
+  animation: showModal 200ms;
+}
+.whoisit.open {
   opacity: 1;
+  pointer-events: all;
   transition: all ease-in-out 200ms;
 }
+
 .whoisit .whoisit_container {
   width: 100%;
   max-width: 700px;
   padding: 3rem;
+  text-align: center;
+}
+
+.whoisit__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 5rem;
+  transition: all ease-in-out 200ms;
+  cursor: pointer;
+}
+
+.whoisit__close:hover {
+  stroke: #ffcc03;
+  outline: 1px salmon;
 }
 
 .whoisit__pokemon {
   width: 100%;
-  max-width: 350px;
+  max-width: 50%;
+  height: 300px;
   filter: brightness(0);
-  transition: all ease-in 150ms;
+  margin: 0 auto 1rem;
+  transition: all ease-in 250ms;
 }
 .whoisit__pokemon.correct {
   filter: brightness(1);
+  transform: scaleZ(1.1);
+}
+
+.whoisit__title {
+  font-family: "Pokemon";
+  color: #ffcb05;
+  font-size: 4rem;
+  line-height: 1.2;
+  text-shadow: 5px 5px #2a75bb;
+  margin: 0 0 1rem;
+}
+
+.whoisit__answer {
+  font-family: "Pokemon";
+  color: #ffcb05;
+  font-size: 3.4rem;
+  letter-spacing: 5px;
+  line-height: 1.2;
+  text-shadow: 5px 5px #2a75bb;
+  margin: 1rem 0 2rem;
+}
+
+.whoisit_actions {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.whoisit__input {
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  width: 100%;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+.whoisit__input:focus {
+  outline: none;
+}
+
+.whoisit_actions button {
+  width: 45%;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  background-color: #2a75bb;
+  color: #fff;
+  text-transform: uppercase;
+  transition: all ease-in 250ms;
+  cursor: pointer;
+}
+.whoisit_actions button:hover {
+  background-color: #276299;
+}
+
+@keyframes showModal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hideModal {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

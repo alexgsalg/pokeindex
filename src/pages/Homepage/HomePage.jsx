@@ -13,24 +13,24 @@ function HomePage() {
   const [mysteryPokemon, setMysteryPokemon] = useState(
     pokeList.find((random) => random.id === Math.floor(Math.random() * 150) + 1)
   );
-  useEffect(() => {
-    const fetchThemAll = async () => {
-      for (let pok = 1; pok <= howMany; pok++) {
-        const url = `https://pokeapi.co/api/v2/pokemon/${pok}`;
-        const response = await fetch(url);
-        const pokemon = await response.json();
-        if (!pokeList.find((item) => item.id === pokemon.id)) {
-          setPokeList((pokeList) => [...pokeList, pokemon]);
-        }
-        if (pok === 151) {
-          setMysteryPokemon(
-            pokeList.find((random) => random.id === pokeNumber)
-          );
-        }
+
+  const fetchThemAll = async () => {
+    for (let pok = 1; pok <= howMany; pok++) {
+      const url = `https://pokeapi.co/api/v2/pokemon/${pok}`;
+      const response = await fetch(url);
+      const pokemon = await response.json();
+      if (!pokeList.find((item) => item.id === pokemon.id)) {
+        setPokeList((pokeList) => [...pokeList, pokemon]);
       }
-      setIsLoaded(true);
-      return isLoaded;
-    };
+      if (pok === 151) {
+        setMysteryPokemon(pokeList.find((random) => random.id === pokeNumber));
+      }
+    }
+    setIsLoaded(true);
+    return isLoaded;
+  };
+
+  useEffect(() => {
     fetchThemAll();
     return pokeList, mysteryPokemon, isLoaded;
   }, []);
@@ -53,7 +53,9 @@ function HomePage() {
       {mysteryModal ? (
         <WhoIsThis
           mysteryPokemon={mysteryPokemon}
+          mysteryModal={mysteryModal}
           setMysteryModal={setMysteryModal}
+          randomPokemon={randomPokemon}
         />
       ) : null}
       <button
@@ -64,29 +66,38 @@ function HomePage() {
         Who is this pokemon
       </button>
 
-      {pokeList.map((pokemon) => (
-        <div key={pokemon.id}>
-          <div className="card_header">
-            <p>{pokemon.name}</p>
-            <span>N°{pokemon.id}</span>
-          </div>
-          <img
-            src={pokemon.sprites.other.dream_world.front_default}
-            width="150"
-          />
-          {pokemon.stats.map((status) => (
-            <div key={status.stat.name}>
-              <p>{status.stat.name}</p>
-              <p>{status.base_stat}</p>
+      <div className="card_grid">
+        {pokeList.map((pokemon) => (
+          <div key={pokemon.id} className="card">
+            <div className="card_header">
+              <span>N°{pokemon.id}</span>
+              <p>
+                {pokemon.name.includes("-")
+                  ? pokemon.name.slice(0, -2)
+                  : pokemon.name}
+              </p>
+
+              <img
+                src={pokemon.sprites.other.dream_world.front_default}
+                width="150"
+              />
             </div>
-          ))}
-          <ul>
-            {pokemon.types.map((item) => (
-              <li key={item.type.name}>{item.type.name}</li>
-            ))}
-          </ul>
-        </div>
-      ))}
+            <div className="card_body">
+              {pokemon.stats.map((status) => (
+                <div key={status.stat.name}>
+                  <p>{status.stat.name}</p>
+                  <p>{status.base_stat}</p>
+                </div>
+              ))}
+              <ul>
+                {pokemon.types.map((item) => (
+                  <li key={item.type.name}>{item.type.name}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
     </main>
   );
 }
