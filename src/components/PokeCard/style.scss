@@ -1,0 +1,199 @@
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.card_body {
+  background-color: #fff;
+  padding: 15px 15px 5px;
+
+  .stats_item {
+    display: grid;
+    grid-template-columns: 1.5fr 0.5fr 1.5fr;
+    gap: 1rem;
+    padding: 10px 0 10px 10px;
+    border-bottom: 1px solid #c4c4c4;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    &__name {
+      font-size: 13px;
+      font-weight: 500;
+      color: #666
+    }
+    
+    &__data {
+      font-size: 14px;
+      font-weight: 500;
+      text-align: end;
+    }
+
+  }
+
+  .progress {
+    width: 100%;
+    height: 8px;
+    margin-top: 7px;
+    background-color: #f3f3f3;
+    border-radius: 50px;
+
+    &_bar {
+      height: 6px;
+      margin-top: 1px;
+      border-radius: 50px;
+
+      &.low {
+        background-color: rgb(214, 16, 16);
+      }
+
+      &.medium {
+        background-color: rgb(214, 138, 16);
+      }
+
+      &.high {
+        background-color: rgb(66, 204, 66);
+      }
+    }
+  }
+}
+
+.card_header {
+  position: relative;
+  background-image: linear-gradient(
+314deg, #7c7c7c5e, transparent);
+  text-align: center;
+
+  &__info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 0 10px;
+
+    span {
+      padding: 6px 1rem;
+      font-size: 25px;
+      font-weight: 700;
+      color: #666;
+      background: #ffffffe0;
+      border-radius: 0 0 5px 0;
+    }
+    
+    p {
+      margin: 0;
+      font-size: 25px;
+      color: white;
+      font-weight: 500;
+      letter-spacing: 0.05rem;
+    }
+
+  }
+  ul {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0 0 0 11px;
+
+    li {
+      list-style: none;
+      padding: 2px 8px;
+      background: white;
+      font-size: 9px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 0.03rem;
+      color: #6b6868;
+      font-weight: 700;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 15%);
+    }
+  }
+
+  &__img {
+    position: relative;
+    width: 80%;
+    height: 170px;
+    margin: 3rem auto -20px;
+    z-index: 10;
+  }
+
+  .pokeshadow {
+    position: absolute;
+    height: 175px;
+    bottom: -20px;
+    left: 50%;
+    filter: brightness(0) blur(18px);
+    opacity: 0.12;
+    transform: translateX(-50%);
+    z-index: 8;
+  }
+
+  &__pokeball {
+    position: absolute;
+    top: -12%;
+    right: -6%;
+    width: 110px;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  &.grass {
+    background-color: rgb(16, 197, 16);
+  }
+  &.bug {
+    background-color: rgb(94, 128, 0);
+  }
+  &.poison {
+    background-color: green;
+  }
+  &.fire {
+    background-color: rgb(240, 121, 24);
+  }
+  &.water {
+    background-color: rgb(0, 118, 197);
+  }
+  &.flying {
+    background-color: green;
+  }
+  &.normal {
+    background-color: rgb(174, 184, 174);
+  }
+  &.ground {
+    background-color: rgb(158, 92, 6);
+  }
+  &.electric {
+    background-color: rgb(248, 251, 57);
+  }
+  &.fairy {
+    background-color: rgb(246, 126, 206);
+  }
+  &.fighting {
+    background-color: rgb(221, 190, 149);
+  }
+  &.psychic {
+    background-color: rgb(205, 207, 52);
+  }
+  &.rock {
+    background-color: rgb(70, 60, 47);
+  }
+  &.steel {
+    background-color: green;
+  }
+  &.ice {
+    background-color: rgb(113, 188, 238);
+  }
+  &.ghost {
+    background-color: rgb(124, 80, 149);
+  }
+  &.dragon {
+    background-color: rgb(228, 246, 205);
+  }
+}

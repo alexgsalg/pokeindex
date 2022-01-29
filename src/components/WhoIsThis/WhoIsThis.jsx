@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./style.css";
+import "./style.scss";
 
 function WhoIsThis({
   mysteryPokemon,
@@ -46,18 +46,18 @@ function WhoIsThis({
         }}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        stroke-width="2"
+        strokeWidth="2"
         stroke="#ffffff"
         fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <line x1="18" y1="6" x2="6" y2="18" />
         <line x1="6" y1="6" x2="18" y2="18" />
       </svg>
       <div className="whoisit_container">
         <img
-          src={mysteryPokemon.sprites.other.dream_world.front_default}
+          src={mysteryPokemon.image}
           alt="Mystery Pokemon"
           className={`whoisit__pokemon ${correctGuess ? "correct" : ""}`}
         />
@@ -74,7 +74,7 @@ function WhoIsThis({
             name="whoisit_input"
             className="whoisit__input"
             placeholder="Take your guess"
-            autocomplete="off"
+            autoComplete="off"
           />
           <button
             onClick={() => {

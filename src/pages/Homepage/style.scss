@@ -14,6 +14,7 @@
   align-items: center;
   opacity: 1;
   transition: all ease-in-out 200ms;
+  z-index: 100;
 }
 
 .card_grid {
@@ -23,15 +24,3 @@
   padding: 2rem;
 }
 
-.card {
-  background-color: green;
-  border-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-}
-
-.card_header {
-}
-
-.card_body {
-  background-color: #fff;
-}

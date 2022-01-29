@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./style.css";
+import "./style.scss";
 
 import PokeIndex from "../../assets/imgs/Pokeindex-logo.png";
 import WhoIsThis from "../../components/WhoIsThis/WhoIsThis";
+import PokeCard from '../../components/PokeCard/PokeCard';
 
 function HomePage() {
   const [pokeList, setPokeList] = useState([]);
@@ -19,8 +20,10 @@ function HomePage() {
       const url = `https://pokeapi.co/api/v2/pokemon/${pok}`;
       const response = await fetch(url);
       const pokemon = await response.json();
-      if (!pokeList.find((item) => item.id === pokemon.id)) {
-        setPokeList((pokeList) => [...pokeList, pokemon]);
+      const pokeData = pokeStats(pokemon);
+      console.log('pokemon',pokeData)
+      if (!pokeList.find((item) => item.id === pokeData.id)) {
+        setPokeList((pokeList) => [...pokeList, pokeData]);
       }
       if (pok === 151) {
         setMysteryPokemon(pokeList.find((random) => random.id === pokeNumber));
@@ -35,9 +38,35 @@ function HomePage() {
     return pokeList, mysteryPokemon, isLoaded;
   }, []);
 
+  const pokeStats = (pk) => {
+    let pkTypes = [];
+    let pkStats = [];
+
+    pk.types.map((t,index) => { 
+      pkTypes.push({
+        id: index,
+        name: t.type.name
+      })
+    });
+
+    pk.stats.map(i => {
+      pkStats.push({
+        name: i.stat.name,
+        data: i.base_stat
+      })
+    });
+    return {
+      id: pk.id,
+      name: pk.name,
+      primaryType: pkTypes[0].name,
+      types: pkTypes,
+      image: pk.sprites.other.dream_world.front_default,
+      stats: pkStats
+    }
+  } 
+
   const randomPokemon = () => {
     setMysteryPokemon(pokeList.find((random) => random.id === pokeNumber));
-    console.log(mysteryPokemon);
     setMysteryModal(true);
     return mysteryPokemon;
   };
@@ -68,34 +97,7 @@ function HomePage() {
 
       <div className="card_grid">
         {pokeList.map((pokemon) => (
-          <div key={pokemon.id} className="card">
-            <div className="card_header">
-              <span>N°{pokemon.id}</span>
-              <p>
-                {pokemon.name.includes("-")
-                  ? pokemon.name.slice(0, -2)
-                  : pokemon.name}
-              </p>
-
-              <img
-                src={pokemon.sprites.other.dream_world.front_default}
-                width="150"
-              />
-            </div>
-            <div className="card_body">
-              {pokemon.stats.map((status) => (
-                <div key={status.stat.name}>
-                  <p>{status.stat.name}</p>
-                  <p>{status.base_stat}</p>
-                </div>
-              ))}
-              <ul>
-                {pokemon.types.map((item) => (
-                  <li key={item.type.name}>{item.type.name}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <PokeCard pokemon={pokemon} />
         ))}
       </div>
     </main>

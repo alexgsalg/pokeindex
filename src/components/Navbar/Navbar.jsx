@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./style.css";
+import "./style.scss";
 import PokeIndex from "../../assets/imgs/Pokeindex-logo.png";
 
 function Navbar() {
