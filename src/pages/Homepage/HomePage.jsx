@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useInView } from 'react-intersection-observer';
+// import { useInView } from 'react-intersection-observer';
 import pokeServices from "../../services/PokeServices";
 import "./style.scss";
 
@@ -47,10 +47,10 @@ function HomePage() {
     return mysteryPokemon;
   };
 
-  const { pkList, inView, entry } = useInView({
-    /* Optional options */
-    threshold: 0,
-  });
+  // const { pkList, inView, entry } = useInView({
+  //   /* Optional options */
+  //   threshold: 0,
+  // });
 
   return (
     <main>
@@ -83,7 +83,8 @@ function HomePage() {
       </div>
 
 
-      <div className="card_grid" ref={pkList}>
+      <div className="card_grid" >
+      {/* <div className="card_grid" ref={pkList}> */}
         {pokeList.map((pokemon) => (
           <PokeCard pokemon={pokemon} key={pokemon.name} />
         ))}
