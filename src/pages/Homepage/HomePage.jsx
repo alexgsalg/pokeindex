@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useInView } from 'react-intersection-observer';
+import pokeServices from "../../services/PokeServices";
 import "./style.scss";
 
 import PokeIndex from "../../assets/imgs/Pokeindex-logo.png";
@@ -20,56 +22,36 @@ function HomePage() {
       const url = `https://pokeapi.co/api/v2/pokemon/${pok}`;
       const response = await fetch(url);
       const pokemon = await response.json();
-      const pokeData = pokeStats(pokemon);
-      console.log('pokemon',pokeData)
+      const pokeData = pokeServices.pokeStats(pokemon);
       if (!pokeList.find((item) => item.id === pokeData.id)) {
         setPokeList((pokeList) => [...pokeList, pokeData]);
       }
+      if (pok === 10) setIsLoaded(true);
       if (pok === 151) {
         setMysteryPokemon(pokeList.find((random) => random.id === pokeNumber));
       }
     }
-    setIsLoaded(true);
+    
     return isLoaded;
   };
 
   useEffect(() => {
     fetchThemAll();
-    return pokeList, mysteryPokemon, isLoaded;
+    return [ pokeList, mysteryPokemon, isLoaded ];
+    // eslint-disable-next-line
   }, []);
-
-  const pokeStats = (pk) => {
-    let pkTypes = [];
-    let pkStats = [];
-
-    pk.types.map((t,index) => { 
-      pkTypes.push({
-        id: index,
-        name: t.type.name
-      })
-    });
-
-    pk.stats.map(i => {
-      pkStats.push({
-        name: i.stat.name,
-        data: i.base_stat
-      })
-    });
-    return {
-      id: pk.id,
-      name: pk.name,
-      primaryType: pkTypes[0].name,
-      types: pkTypes,
-      image: pk.sprites.other.dream_world.front_default,
-      stats: pkStats
-    }
-  } 
 
   const randomPokemon = () => {
     setMysteryPokemon(pokeList.find((random) => random.id === pokeNumber));
     setMysteryModal(true);
     return mysteryPokemon;
   };
+
+  const { pkList, inView, entry } = useInView({
+    /* Optional options */
+    threshold: 0,
+  });
+
   return (
     <main>
       {/* Loading */}
@@ -87,17 +69,23 @@ function HomePage() {
           randomPokemon={randomPokemon}
         />
       ) : null}
-      <button
-        onClick={() => {
-          randomPokemon();
-        }}
-      >
-        Who is this pokemon
-      </button>
 
-      <div className="card_grid">
+      <div className="pokedex_header">
+        <h1 className="pokedex_header__title">Pokedex Gen 1</h1>
+        <button
+          className="pokedex_header__btn"
+          onClick={() => {
+            randomPokemon();
+          }}
+        >
+          Who is this pokemon ?
+        </button>
+      </div>
+
+
+      <div className="card_grid" ref={pkList}>
         {pokeList.map((pokemon) => (
-          <PokeCard pokemon={pokemon} />
+          <PokeCard pokemon={pokemon} key={pokemon.name} />
         ))}
       </div>
     </main>

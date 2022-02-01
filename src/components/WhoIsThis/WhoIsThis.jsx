@@ -20,7 +20,7 @@ function WhoIsThis({
         setMysteryModal(false);
         setCorrectGuess(false);
       }, 3000);
-    } else if (guess == mysteryPokemon.name) {
+    } else if (guess === mysteryPokemon.name) {
       setAnswer(mysteryPokemon.name);
       setCorrectGuess(true);
 
@@ -56,12 +56,12 @@ function WhoIsThis({
         <line x1="6" y1="6" x2="18" y2="18" />
       </svg>
       <div className="whoisit_container">
+        <p className="whoisit__title">Who's that Pokemon</p>
         <img
           src={mysteryPokemon.image}
           alt="Mystery Pokemon"
           className={`whoisit__pokemon ${correctGuess ? "correct" : ""}`}
         />
-        <p className="whoisit__title">Who's that Pokemon</p>
         <p className="whoisit__answer">
           {!answer.includes("-")
             ? answer.charAt(0).toUpperCase() + answer.slice(1)
