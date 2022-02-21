@@ -4,6 +4,7 @@ import pokeServices from "../../services/PokeServices";
 import "./style.scss";
 
 import PokeIndex from "../../assets/imgs/Pokeindex-logo.png";
+import UltraBall from "../../assets/imgs/UltraBallPokemon.png";
 import WhoIsThis from "../../components/WhoIsThis/WhoIsThis";
 import PokeCard from '../../components/PokeCard/PokeCard';
 
@@ -26,7 +27,9 @@ function HomePage() {
       if (!pokeList.find((item) => item.id === pokeData.id)) {
         setPokeList((pokeList) => [...pokeList, pokeData]);
       }
-      if (pok === 10) setIsLoaded(true);
+      if (pok === 80)  {
+        setIsLoaded(true);
+      }
       if (pok === 151) {
         setMysteryPokemon(pokeList.find((random) => random.id === pokeNumber));
       }
@@ -47,19 +50,16 @@ function HomePage() {
     return mysteryPokemon;
   };
 
-  // const { pkList, inView, entry } = useInView({
-  //   /* Optional options */
-  //   threshold: 0,
-  // });
-
   return (
     <main>
       {/* Loading */}
       {!isLoaded ? (
         <div className="loading">
-          <img src={PokeIndex} alt="Pokemon" />
+          <img src={PokeIndex} className="loading_name" alt="Pokemon" />
+          <img src={UltraBall} className="loading_pokeball" alt="UltraBall" />
+          
         </div>
-      ) : null}
+      ) : null} 
       {/* Who is this Pokemon */}
       {mysteryModal ? (
         <WhoIsThis
@@ -74,6 +74,7 @@ function HomePage() {
         <h1 className="pokedex_header__title">Pokedex Gen 1</h1>
         <button
           className="pokedex_header__btn"
+          disabled={pokeList.length !== 151}
           onClick={() => {
             randomPokemon();
           }}
@@ -84,7 +85,6 @@ function HomePage() {
 
 
       <div className="card_grid" >
-      {/* <div className="card_grid" ref={pkList}> */}
         {pokeList.map((pokemon) => (
           <PokeCard pokemon={pokemon} key={pokemon.name} />
         ))}
