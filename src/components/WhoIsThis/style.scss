@@ -93,19 +93,20 @@
 }
 
 .whoisit__input {
-  padding: 1rem;
-  border-radius: 10px;
-  border: 1px solid #fff;
   width: 100%;
   margin-bottom: 2rem;
+  padding: 1rem;
+  border: 1px solid #fff;
+  border-radius: 10px;
   text-align: center;
   font-size: 1.5rem;
+  box-sizing: border-box;
 }
 .whoisit__input:focus {
   outline: none;
 }
 
-.whoisit_actions button {
+.whoisit__another, .whoisit__guess {
   width: 45%;
   padding: 1rem;
   border: none;
@@ -117,8 +118,61 @@
   transition: all ease-in 250ms;
   cursor: pointer;
 }
+.whoisit__another {
+  background-color: #696969;
+}
 .whoisit_actions button:hover {
   background-color: #276299;
+}
+
+@media screen and (max-width: 600px) {
+  .whoisit {
+    align-items: flex-start;
+    padding-top: 5vh;
+
+    &_container {
+      height: 90vh;
+      padding: 0.5rem 1.5rem 1.5rem !important;
+    }
+    
+    &__title {
+      font-size: 2rem;
+      line-height: 2;
+    }
+
+    &__close {
+      top: 0.5rem;
+      right: 1rem;
+      width: 3rem;
+    }
+
+    &__pokemon {
+      max-width: 70%;
+      height: 25vh;
+    }
+
+    &__input {
+      margin-bottom: 1rem;
+    }
+
+    &__answer {
+      margin: 1rem 0 1rem;
+    }
+
+    &_actions {
+      height: 30vh;
+      flex-direction: column;
+      box-sizing: border-box;
+
+      button {
+        width: 80%;
+      }
+    }
+    &__another {
+      // display: none;
+      order: 2;
+    }
+  }
 }
 
 @keyframes showModal {

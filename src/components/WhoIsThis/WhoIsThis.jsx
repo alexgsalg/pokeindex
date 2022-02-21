@@ -77,6 +77,7 @@ function WhoIsThis({
             autoComplete="off"
           />
           <button
+          className="whoisit__another"
             onClick={() => {
               randomPokemon();
             }}
@@ -84,6 +85,7 @@ function WhoIsThis({
             choose another
           </button>
           <button
+          className="whoisit__guess"
             onClick={() => {
               handleGuess();
             }}

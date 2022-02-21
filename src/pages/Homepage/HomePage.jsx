@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import { useInView } from 'react-intersection-observer';
+import TextLoop from "react-text-loop";
 import pokeServices from "../../services/PokeServices";
 import "./style.scss";
 
@@ -79,7 +80,13 @@ function HomePage() {
             randomPokemon();
           }}
         >
-          Who is this pokemon ?
+          {pokeList.length === 151 ? 'Who is this pokemon ?' : 
+          <TextLoop>
+            <span>Cacthing all...</span>
+            <span>Hidding names...</span>
+            <span>Covering faces...</span>
+          </TextLoop>
+          }
         </button>
       </div>
 
