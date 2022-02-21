@@ -8,7 +8,6 @@ function PokeCard({pokemon}) {
   const calculateStats = (dataValue) => {
     let barClass;
     const barWidth = (100 * dataValue) / 160;
-    console.log(barWidth)
     if (dataValue < 40) barClass = 'low';
     if (dataValue >= 40 && dataValue <= 80) barClass = 'medium';
     if (dataValue > 80) barClass = 'high';
