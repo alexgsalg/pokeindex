@@ -24,3 +24,32 @@
   padding: 2rem;
 }
 
+.pokedex_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1300px;
+  margin: 1rem auto;
+
+  &__title {
+    font-size: 3rem;
+    color: #666;
+  }
+
+  &__btn {
+    font-size: 16px;
+    font-family: "Pokemon GB", Arial, sans-serif;
+    border-radius: 2px;
+    padding: 15px 20px;
+    line-height: 16px;
+    background: white;
+    border: 1px solid white;
+    cursor: pointer;
+    box-shadow: 0 1px 0 1px black, inset 0 1px 0 1px black, 0 0 0 1px black, inset 0 0 0 1px black;
+    transition: all ease 250ms;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}

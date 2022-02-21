@@ -20,6 +20,7 @@
   pointer-events: none;
   transition: all ease-in-out 200ms;
   animation: showModal 200ms;
+  z-index: 1000;
 }
 .whoisit.open {
   opacity: 1;
@@ -67,7 +68,7 @@
   font-size: 4rem;
   line-height: 1.2;
   text-shadow: 5px 5px #2a75bb;
-  margin: 0 0 1rem;
+  margin: 0 0 3rem;
 }
 
 .whoisit__answer {
